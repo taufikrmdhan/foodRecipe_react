@@ -6,11 +6,11 @@ import {ReactComponent as User} from "../assets/image/Userpanel.svg";
 const LandingPage = () => {
   return (
     <div className={landing.body}>
-      <header class={landing.customHeader}>
-        <nav class="navbar navbar-expand-lg bg-transparent fixed-top top-navbar">
-          <div class="container">
+      <header className={landing.customHeader}>
+        <nav className="navbar navbar-expand-lg bg-transparent fixed-top top-navbar">
+          <div className="container">
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
@@ -18,33 +18,33 @@ const LandingPage = () => {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class={`nav-item ${landing.customNav}`}>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className={`nav-item ${landing.customNav}`}>
                   <Link
-                    class={`nav-link active ${landing.aList} ${landing.activeCustom}`}
+                    className={`nav-link active ${landing.aList} ${landing.activeCustom}`}
                     aria-current="page"
                     to=""
                   >
                     Home
                   </Link>
                 </li>
-                <li class={`nav-item ${landing.customNav}`}>
-                  <Link class={`nav-link active ${landing.aList}`} to="/add">
+                <li className={`nav-item ${landing.customNav}`}>
+                  <Link className={`nav-link active ${landing.aList}`} to="/add">
                     Add Recipe
                   </Link>
                 </li>
-                <li class={`nav-item ${landing.customNav}`}>
-                  <Link class={`nav-link active ${landing.aList}`} to="/profile">
+                <li className={`nav-item ${landing.customNav}`}>
+                  <Link className={`nav-link active ${landing.aList}`} to="/profile">
                     Profile
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <button type="button" class="btn">
+              <button type="button" className="btn">
                 <Link to="/login">
                   <User/>
                 </Link>
@@ -52,37 +52,37 @@ const LandingPage = () => {
             </div>
           </div>
         </nav>
-        <section class={landing.customSectionHead}>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6 d-flex align-items-start d-flex flex-column justify-content-center">
-                <h1 class={landing.h1}>Discover Recipe & Delicious Food</h1>
+        <section className={landing.customSectionHead}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6 d-flex align-items-start d-flex flex-column justify-content-center">
+                <h1 className={landing.h1}>Discover Recipe & Delicious Food</h1>
                 <div
-                  class={`position-relative w-100 ${landing.customButtonHeader}`}
+                  className={`position-relative w-100 ${landing.customButtonHeader}`}
                 >
-                  <div class={landing.customIconSearch}>
+                  <div className={landing.customIconSearch}>
                     <i
-                      class={`fa fa-search ${landing.searchCustom}`}
+                      className={`fa fa-search ${landing.searchCustom}`}
                       aria-hidden="true"
                     ></i>
                     {/* <img
                       src={require("../assets/image/search.svg")}
-                      class=
+                      className=
                       alt="icon search"
                     /> */}
                   </div>
                   <input
                     type="search"
                     placeholder="Search restaurant,food"
-                    class={landing.inputSearchCustom}
+                    className={landing.inputSearchCustom}
                   />
                 </div>
               </div>
-              <div class={`col-md-6 ${landing.imgWrapper}`}>
-                <div class={landing.imgHeader}>
+              <div className={`col-md-6 ${landing.imgWrapper}`}>
+                <div className={landing.imgHeader}>
                   <img
                     src={require("../assets/image/makanan1.png")}
-                    class="img-fluid"
+                    className="img-fluid"
                     alt="img icon"
                   />
                 </div>
@@ -92,30 +92,30 @@ const LandingPage = () => {
         </section>
       </header>
       <main>
-        <section class="container py-5">
-          <div class={landing.customRectangle}>
+        <section className="container py-5">
+          <div className={landing.customRectangle}>
             <h3 className={landing.h3}>Popular For You</h3>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class={landing.imgMainPopular}>
+          <div className="row">
+            <div className="col-md-6">
+              <div className={landing.imgMainPopular}>
                 <img
                   src={require("../assets/image/makanan2.png")}
-                  class="img-fluid"
+                  className="img-fluid"
                   alt="image2"
                 />
               </div>
             </div>
-            <div class="col-md-6 d-flex justify-content-center flex-column p-5">
+            <div className="col-md-6 d-flex justify-content-center flex-column p-5">
               <h2>Healthy Bone Broth Ramen (Quick & Easy)</h2>
-              <hr class="w-25" />
+              <hr className="w-25" />
               <p>
                 Quick + Easy Chicken Bone Broth Ramen- Healthy chicken ramen in
                 a hurry? That’s right!
               </p>
               <div>
-                <button type="button" class={`btn ${landing.btnCustom}`}>
-                  <Link class={landing.aBtn} to="/detail">
+                <button type="button" className={`btn ${landing.btnCustom}`}>
+                  <Link className={landing.aBtn} to="/detail">
                     Learn more
                   </Link>
                 </button>
@@ -123,135 +123,135 @@ const LandingPage = () => {
             </div>
           </div>
         </section>
-        <section class="container py-5">
-          <div class={`mb-5 ${landing.customRectangle}`}>
+        <section className="container py-5">
+          <div className={`mb-5 ${landing.customRectangle}`}>
             <h3 className={landing.h3}>New Recipe</h3>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class={landing.imgMainNewRecipe}>
+          <div className="row">
+            <div className="col-md-6">
+              <div className={landing.imgMainNewRecipe}>
                 <img
                   src={require("../assets/image/makanan9.png")}
-                  class="img-fluid"
+                  className="img-fluid"
                   alt="image3"
                 />
               </div>
             </div>
-            <div class="col-md-6 d-flex justify-content-center flex-column p-5">
+            <div className="col-md-6 d-flex justify-content-center flex-column p-5">
               <h2>Healthy Bone Broth Ramen (Quick & Easy)</h2>
-              <hr class="w-25" />
+              <hr className="w-25" />
               <p>
                 Quick + Easy Chicken Bone Broth Ramen- Healthy chicken ramen in
                 a hurry? That’s right!
               </p>
               <div>
-                <button type="button" class={`btn ${landing.btnCustom}`}>
+                <button type="button" className={`btn ${landing.btnCustom}`}>
                   Learn more
                 </button>
               </div>
             </div>
           </div>
         </section>
-        <section class="container">
-          <div class={`mb-5 ${landing.customRectangle}`}>
+        <section className="container">
+          <div className={`mb-5 ${landing.customRectangle}`}>
             <h3 className={landing.h3}>Popular Recipe</h3>
           </div>
-          <div class={`${landing.grid12} ${landing.gapMedium}`}>
-            <div class={`${landing.cusGridMd4} position-relative p-0`}>
+          <div className={`${landing.grid12} ${landing.gapMedium}`}>
+            <div className={`${landing.cusGridMd4} position-relative p-0`}>
               <img
                 src={require("../assets/image/makanan3.png")}
-                class="img-fluid"
+                className="img-fluid"
                 alt="makanan3"
               />
-              <span class={`position-absolute ${landing.titleImage}`}>
+              <span className={`position-absolute ${landing.titleImage}`}>
                 Chicken Kare
               </span>
             </div>
-            <div class={`${landing.cusGridMd4} position-relative p-0`}>
+            <div className={`${landing.cusGridMd4} position-relative p-0`}>
               <img
                 src={require("../assets/image/makanan4.png")}
-                class="img-fluid"
+                className="img-fluid"
                 alt="makan4"
               />
-              <span class={`position-absolute ${landing.titleImage}`}>
+              <span className={`position-absolute ${landing.titleImage}`}>
                 Bomb Chicken
               </span>
             </div>
-            <div class={`${landing.cusGridMd4} position-relative p-0`}>
+            <div className={`${landing.cusGridMd4} position-relative p-0`}>
               <img
                 src={require("../assets/image/makanan5.png")}
-                class="img-fluid"
+                className="img-fluid"
                 alt="makan5"
               />
-              <span class={`position-absolute ${landing.titleImage}`}>
+              <span className={`position-absolute ${landing.titleImage}`}>
                 Banana Smooth
               </span>
             </div>
-            <div class={`${landing.cusGridMd4} position-relative p-0`}>
+            <div className={`${landing.cusGridMd4} position-relative p-0`}>
               <img
                 src={require("../assets/image/makanan6.png")}
-                class="img-fluid"
+                className="img-fluid"
                 alt="makan6"
               />
-              <span class={`position-absolute ${landing.titleImage}`}>
+              <span className={`position-absolute ${landing.titleImage}`}>
                 Coffe Lava Cake
               </span>
             </div>
-            <div class={`${landing.cusGridMd4} position-relative p-0`}>
+            <div className={`${landing.cusGridMd4} position-relative p-0`}>
               <img
                 src={require("../assets/image/makanan7.png")}
-                class="img-fluid"
+                className="img-fluid"
                 alt="makan7"
               />
-              <span class={`position-absolute ${landing.titleImage}`}>
+              <span className={`position-absolute ${landing.titleImage}`}>
                 Sugar Salmon
               </span>
             </div>
-            <div class={`${landing.cusGridMd4} position-relative p-0`}>
+            <div className={`${landing.cusGridMd4} position-relative p-0`}>
               <img
                 src={require("../assets/image/makanan8.png")}
-                class="img-fluid"
+                className="img-fluid"
                 alt="makan8"
               />
-              <span class={`position-absolute ${landing.titleImage}`}>
+              <span className={`position-absolute ${landing.titleImage}`}>
                 Indian Salad
               </span>
             </div>
           </div>
         </section>
       </main>
-      <footer class={`container-fluid mt-5 ${landing.customFooter}`}>
-        <div class="text-center m-5">
-          <h4 class={landing.h4}>Eat, Cook, Repeat</h4>
-          <p class="text-muted">Share your best recipe by uploading here !</p>
+      <footer className={`container-fluid mt-5 ${landing.customFooter}`}>
+        <div className="text-center m-5">
+          <h4 className={landing.h4}>Eat, Cook, Repeat</h4>
+          <p className="text-muted">Share your best recipe by uploading here !</p>
         </div>
-        <nav class=" d-flex justify-content-center">
-          <div class={`container ${landing.customInnerFooter}`}>
-            <div class={`${landing.footerLinks}`}>
-              <ul class="navbar-nav d-flex flex-row">
-                <li class={landing.customListFooter}>
-                  <Link class={landing.aList} to="">
+        <nav className=" d-flex justify-content-center">
+          <div className={`container ${landing.customInnerFooter}`}>
+            <div className={`${landing.footerLinks}`}>
+              <ul className="navbar-nav d-flex flex-row">
+                <li className={landing.customListFooter}>
+                  <Link className={landing.aList} to="">
                     Product
                   </Link>
                 </li>
-                <li class={landing.customListFooter}>
-                  <Link class={landing.aList} to="">
+                <li className={landing.customListFooter}>
+                  <Link className={landing.aList} to="">
                     Company
                   </Link>
                 </li>
-                <li class={landing.customListFooter}>
-                  <Link class={landing.aList} to="">
+                <li className={landing.customListFooter}>
+                  <Link className={landing.aList} to="">
                     Learn More
                   </Link>
                 </li>
-                <li class={landing.customListFooter}>
-                  <Link class={landing.aList} to="">
+                <li className={landing.customListFooter}>
+                  <Link className={landing.aList} to="">
                     Get In Touch
                   </Link>
                 </li>
               </ul>
             </div>
-            <div class={landing.customArcademy}>
+            <div className={landing.customArcademy}>
               <p>© Arcademy</p>
             </div>
           </div>
