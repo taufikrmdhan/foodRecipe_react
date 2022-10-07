@@ -1,10 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import landing from "../assets/landingpage.module.css";
-import {ReactComponent as User} from "../assets/image/Userpanel.svg";
+import { ReactComponent as User } from "../assets/image/Userpanel.svg";
 import Footers from "../Component/footer";
+import axios from "axios";
 
 const LandingPage = () => {
+  const [recipe, setRecipe] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [iserror, setIserror] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/recipe/list")
+      .then((res) => {
+        setTimeout(() => {
+          setRecipe(res.data);
+          setLoading(false);
+        }, 100);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className={landing.body}>
       <header className={landing.customHeader}>
@@ -33,12 +53,18 @@ const LandingPage = () => {
                   </Link>
                 </li>
                 <li className={`nav-item ${landing.customNav}`}>
-                  <Link className={`nav-link active ${landing.aList}`} to="/add">
+                  <Link
+                    className={`nav-link active ${landing.aList}`}
+                    to="/add"
+                  >
                     Add Recipe
                   </Link>
                 </li>
                 <li className={`nav-item ${landing.customNav}`}>
-                  <Link className={`nav-link active ${landing.aList}`} to="/profile">
+                  <Link
+                    className={`nav-link active ${landing.aList}`}
+                    to="/profile"
+                  >
                     Profile
                   </Link>
                 </li>
@@ -47,7 +73,7 @@ const LandingPage = () => {
             <div>
               <button type="button" className="btn">
                 <Link to="/login">
-                  <User/>
+                  <User />
                 </Link>
               </button>
             </div>
@@ -158,17 +184,38 @@ const LandingPage = () => {
             <h3 className={landing.h3}>Popular Recipe</h3>
           </div>
           <div className={`${landing.grid12} ${landing.gapMedium}`}>
-            <div className={`${landing.cusGridMd4} position-relative p-0`}>
-              <img
-                src={require("../assets/image/makanan3.png")}
-                className="img-fluid"
-                alt="makanan3"
-              />
-              <span className={`position-absolute ${landing.titleImage}`}>
-                Chicken Kare
-              </span>
-            </div>
-            <div className={`${landing.cusGridMd4} position-relative p-0`}>
+            {loading ? (
+              <p>Loading...</p>
+            ) : iserror ? (
+              <p>failed to get</p>
+            ) : (
+              recipe.map((data, i) => {
+                // {
+                //     "id_recipe": 14,
+                //     "title": "Nikmat",
+                //     "image": "1663827497930.jpg",
+                //     "ingredient": "masukkan bumbu, siapkan air panas , dan masak",
+                //     "videostep": "dsdsdsd",
+                //     "createdat": "2022-09-08T17:00:00.000Z"
+                // },
+                return (
+                  <div
+                    key={data.id_recipe}
+                    className={`${landing.cusGridMd4} position-relative p-0`}
+                  >
+                    <img
+                      src={require(`../assets/image/makanan4.png`)}
+                      className="img-fluid"
+                      alt={data.title}
+                    />
+                    <span className={`position-absolute ${landing.titleImage}`}>
+                      {data.title}
+                    </span>
+                  </div>
+                );
+              })
+            )}
+            {/* <div className={`${landing.cusGridMd4} position-relative p-0`}>
               <img
                 src={require("../assets/image/makanan4.png")}
                 className="img-fluid"
@@ -217,11 +264,12 @@ const LandingPage = () => {
               <span className={`position-absolute ${landing.titleImage}`}>
                 Indian Salad
               </span>
-            </div>
+            </div> */}
           </div>
         </section>
       </main>
       <Footers />
+      {/* {JSON.stringify(recipe)} */}
     </div>
   );
 };

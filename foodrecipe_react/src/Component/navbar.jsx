@@ -30,7 +30,7 @@ const navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item px-3">
-                  <Link className={`nav-link active ${style.customNav} ${style.activeCustom}`} href="">
+                  <Link className={`nav-link active ${style.customNav} ${style.activeCustom}`} href="/add">
                     Add Recipe
                   </Link>
                 </li>
