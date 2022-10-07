@@ -147,7 +147,7 @@ const DetailRecipe = () => {
             <div class={`col-md-6 d-flex flex-row justify-content-end align-items-center ${detailstyle.spaceUserComment}`}>
               <img
                 src={require("../assets/image/IMG_9001.jpg")}
-                alt="chicken"
+                alt="profile"
                 class={`img-fluid rounded-circle ${detailstyle.customImageUserComment}`}
               />
               <div class="d-flex flex-column mx-3 mt-2">
