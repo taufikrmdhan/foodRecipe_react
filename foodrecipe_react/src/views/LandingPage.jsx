@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import landing from "../assets/landingpage.module.css";
 import { ReactComponent as User } from "../assets/image/Userpanel.svg";
 import Footers from "../Component/footer";
 import axios from "axios";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState([]);
   const [loading, setLoading] = useState(true);
   const [iserror, setIserror] = useState(false);
 
   useEffect(() => {
+    // const token = localStorage.getItem("token");
+    // const user = localStorage.getItem("user");
+    // if(!token || !user) {
+    //   return navigate("/login");
+    // }
     axios
-      .get("http://localhost:4000/recipe/list")
+      .get(`${process.env.REACT_APP_BACKEND_URL}/recipe/list`, {
+        // headers: {
+        //   token: token,
+        // }
+      })
       .then((res) => {
         setTimeout(() => {
           setRecipe(res.data);
@@ -204,7 +214,7 @@ const LandingPage = () => {
                     className={`${landing.cusGridMd4} position-relative p-0`}
                   >
                     <img
-                      src={require(`../assets/image/makanan4.png`)}
+                      src={`${process.env.REACT_APP_BACKEND_URL}/${data.image}`}
                       className="img-fluid"
                       alt={data.title}
                     />

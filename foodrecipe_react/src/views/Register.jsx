@@ -1,8 +1,43 @@
-import React from "react";
+import React, {useState} from "react";
 import style from "../assets/style.module.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const register = () => {
+const Register = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    nama: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(form);
+    if (form.nama === "" || form.email === "" || form.phone === "" || form.password === "") {
+      alert("Please fill all the field");
+    } else {
+      const body = {
+        nama: form.nama,
+        email: form.email,
+        phone: form.phone,
+        password: form.password,
+      }
+      axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/user/register`, body)
+      .then((res) => {
+        console.log(res.data);
+        return navigate("/login");
+        alert("Register success");   
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+  };
+
   return (
     <div className={style.body}>
       <div className="container-fluid">
@@ -11,23 +46,24 @@ const register = () => {
             <img src={require("../assets/image/icon.png")} alt="img icon" />
           </div>
           <div className="col-md-6 d-flex align-items-center">
-            <form className="row g-3 m-5">
+            <form className="row g-3 m-5" onSubmit={(e) => onSubmitHandler(e)}>
               <h3 className="text-center">Let's Get Started</h3>
               <p className="text-center text-muted">
                 Create new account to access all features
               </p>
-              <div>
-                <label for="inputUsername" className="form-label">
+              <div className="form-group">
+                <label htmlFor="inputUsername" className="form-label">
                   Username
                 </label>
                 <input
                   className="form-control"
                   id="inputUsername"
                   placeholder="Enter name"
+                   onChange={(e) => setForm({...form, nama: e.target.value})}
                 />
               </div>
-              <div>
-                <label for="inputEmail" className="form-label">
+              <div className="form-group">
+                <label htmlFor="inputEmail" className="form-label">
                   Email
                 </label>
                 <input
@@ -35,20 +71,22 @@ const register = () => {
                   className="form-control"
                   id="inputEmail"
                   placeholder="Enter email address"
+                   onChange={(e) => setForm({...form, email: e.target.value})}
                 />
               </div>
-              <div>
-                <label for="inputPhone" className="form-label">
+              <div className="form-group">
+                <label htmlFor="inputPhone" className="form-label">
                   Phone Number
                 </label>
                 <input
                   className="form-control"
                   id="inputPhone"
                   placeholder="08xxxxxxxxx"
+                   onChange={(e) => setForm({...form, phone: e.target.value})}
                 />
               </div>
-              <div>
-                <label for="inputPassword" className="form-label">
+              <div className="form-group">
+                <label htmlFor="inputPassword" className="form-label">
                   Password
                 </label>
                 <input
@@ -56,16 +94,17 @@ const register = () => {
                   className="form-control"
                   id="inputPassword"
                   placeholder="Create New Password"
+                   onChange={(e) => setForm({...form, password: e.target.value})}
                 />
               </div>
-              <div>
-                <label for="inputPassword" className="form-label">
+              <div className="form-group">
+                <label htmlFor="confirmInputPassword" className="form-label">
                   Confirm Password
                 </label>
                 <input
                   type="password"
                   className="form-control"
-                  id="inputPassword"
+                  id="confirmInputPassword"
                   placeholder="New Password"
                 />
               </div>
@@ -79,9 +118,9 @@ const register = () => {
                   I agree of term conditions
                 </label>
               </div>
-              <div className="d-grid gap-2">
+              <div className="form-group d-grid gap-2">
                 <button type="submit" className={`btn ${style.btnCustom}`}>
-                  <Link className={style.a} to="/login">Register Accout</Link>
+                  Register Accout
                 </button>
               </div>
               <div className="text-center">
@@ -97,4 +136,4 @@ const register = () => {
     </div>
   );
 };
-export default register;
+export default Register;

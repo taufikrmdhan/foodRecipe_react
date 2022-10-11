@@ -11,6 +11,7 @@ import Profil from "../views/Profile";
 import ChangePas from "../views/ChangePass";
 import Detail from "../views/DetailRecipe";
 import Video from "../views/DetailVideo";
+import Update from "../views/UpdateRecipe";
 
 const Router = () => {
   return (
@@ -33,6 +34,7 @@ const Router = () => {
           <Route path="change" element={<ChangePas />} />
           <Route path="detail" element={<Detail />} />
           <Route path="video" element={<Video />} />
+          <Route path="update" element={<Update />} />
         </Route>
       </Routes>
     </BrowserRouter>

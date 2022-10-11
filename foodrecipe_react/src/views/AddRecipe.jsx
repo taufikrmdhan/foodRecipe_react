@@ -51,7 +51,7 @@ const AddRecipe = () => {
           console.log(res);
           setImage("");
           alert("Recipe added successfully");
-        //   formPost.reset();
+        //   form.reset();
         })
         .catch((err) => {
           console.log(err);

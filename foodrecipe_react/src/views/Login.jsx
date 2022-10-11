@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "../assets/style.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const login = () => {
+
+const Login = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(form);
+    if (form.username === "" || form.password === "") {
+      alert("Data tidak boleh kosong");
+    } else {
+      const body = {
+        email: form.email,
+        password: form.password,
+      };
+      axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, body)
+        .then((res) => {
+          localStorage.setItem("token", res.data.token.token);
+          localStorage.setItem("data", JSON.stringify(res.data.token.data));
+          return navigate("/landing");
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   return (
     <div className={style.body}>
       <div className="container-fluid">
@@ -11,7 +42,7 @@ const login = () => {
             <img src={require("../assets/image/icon.png")} alt="img icon" />
           </div>
           <div className="col-md-6 d-flex align-items-center">
-            <form className="row g-3 m-5">
+            <form className="row g-3 m-5" onSubmit={(e) => onSubmitHandler(e)}>
               <h3 className="text-center">Welcome</h3>
               <p className="text-center text-muted">
                 Log in into your exiting account
@@ -25,6 +56,7 @@ const login = () => {
                   className="form-control"
                   id="inputEmail"
                   placeholder="email@gmail.com"
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
                 />
               </div>
               <div>
@@ -36,6 +68,7 @@ const login = () => {
                   className="form-control"
                   id="inputPassword"
                   placeholder="Password"
+                  onChange={(e) => setForm({ ...form, password: e.target.value })}
                 />
               </div>
               <div>
@@ -52,9 +85,7 @@ const login = () => {
               </div>
               <div className="d-grid gap-2">
                 <button type="submit" className={`btn ${style.btnCustom}`}>
-                  <Link className={style.a} to="/landing">
-                    Login
-                  </Link>
+                    Login                
                 </button>
               </div>
               <div className="text-end">
@@ -77,4 +108,4 @@ const login = () => {
     </div>
   );
 };
-export default login;
+export default Login;
