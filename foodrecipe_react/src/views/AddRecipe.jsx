@@ -8,6 +8,7 @@ import axios from "axios";
 
 
 const AddRecipe = () => {
+  const navigate = useNavigate();
     const hiddenFileInput = useRef(null);
     // const navigate = useNavigate();
     const [image, setImage] = useState("");
@@ -50,6 +51,7 @@ const AddRecipe = () => {
         .then((res) => {
           console.log(res);
           setImage("");
+          return navigate("/detail");
           alert("Recipe added successfully");
         //   form.reset();
         })

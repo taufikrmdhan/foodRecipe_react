@@ -24,6 +24,7 @@ const Login = () => {
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, body)
         .then((res) => {
+          console.log(res.data);
           localStorage.setItem("token", res.data.token.token);
           localStorage.setItem("data", JSON.stringify(res.data.token.data));
           return navigate("/landing");
@@ -31,6 +32,7 @@ const Login = () => {
         })
         .catch((err) => {
           console.log(err);
+          alert("Email atau password salah");
         });
     }
   };

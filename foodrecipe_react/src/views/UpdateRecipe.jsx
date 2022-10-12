@@ -29,6 +29,7 @@ const UpdateRecipe = () => {
         .then((res) => {
             console.log(res);
             setImage("");
+            return navigate("/detail");
             alert("Recipe updated successfully");
         //   formPost.reset();
         })

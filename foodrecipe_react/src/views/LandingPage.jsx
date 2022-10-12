@@ -7,9 +7,33 @@ import axios from "axios";
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const [title, setTitle] = useState("");
   const [recipe, setRecipe] = useState([]);
   const [loading, setLoading] = useState(true);
   const [iserror, setIserror] = useState(false);
+
+  const onSubmitHandler = (e) => {
+    
+    e.preventDefault();
+    console.log(title);
+    if(title != ""){
+      axios 
+      .get(`${process.env.REACT_APP_BACKEND_URL}/recipe/list/${title}`)
+      .then((res) => {
+        // setTimeout(() => {
+        //   setRecipe(res.data);
+        //   setLoading(false);
+        // }, 100);
+        console.log(res.data);
+        if(res.data.data = ""){
+          alert("Recipe not found");
+        } else{
+          navigate(`/detail/?title=${title}`);
+        }
+      })
+    }
+    
+  }
 
   useEffect(() => {
     // const token = localStorage.getItem("token");
@@ -18,11 +42,7 @@ const LandingPage = () => {
     //   return navigate("/login");
     // }
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/recipe/list`, {
-        // headers: {
-        //   token: token,
-        // }
-      })
+      .get(`${process.env.REACT_APP_BACKEND_URL}/recipe/list`)
       .then((res) => {
         setTimeout(() => {
           setRecipe(res.data);
@@ -34,6 +54,11 @@ const LandingPage = () => {
         console.log(err);
       });
   }, []);
+
+  const logout = () => {
+    localStorage.clear();
+    return navigate("/login");
+  }
 
   return (
     <div className={landing.body}>
@@ -82,9 +107,7 @@ const LandingPage = () => {
             </div>
             <div>
               <button type="button" className="btn">
-                <Link to="/login">
-                  <User />
-                </Link>
+                <User onClick={logout} />
               </button>
             </div>
           </div>
@@ -94,6 +117,7 @@ const LandingPage = () => {
             <div className="row">
               <div className="col-md-6 d-flex align-items-start d-flex flex-column justify-content-center">
                 <h1 className={landing.h1}>Discover Recipe & Delicious Food</h1>
+                <form action="" onSubmit={(e) => onSubmitHandler(e)}>
                 <div
                   className={`position-relative w-100 ${landing.customButtonHeader}`}
                 >
@@ -112,8 +136,10 @@ const LandingPage = () => {
                     type="search"
                     placeholder="Search restaurant,food"
                     className={landing.inputSearchCustom}
+                    onChange={(e) => setTitle(e.target.value)}
                   />
                 </div>
+                </form>
               </div>
               <div className={`col-md-6 ${landing.imgWrapper}`}>
                 <div className={landing.imgHeader}>

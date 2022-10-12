@@ -10,6 +10,8 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [iserror, setIserror] = useState(false);
 
+  const data = JSON.parse(localStorage.getItem("data"));
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/recipe/list`)
@@ -101,7 +103,7 @@ const Profile = () => {
                   />
                 </a>
               </button>
-              <p className={profilestyle.customNameProfile}>Ranti Maria</p>
+              <p className={profilestyle.customNameProfile}>{data.nama}</p>
               <div
                 className={`collapse multi-collapse ${profilestyle.customSpaceUpdate}`}
                 id="updateProfile"

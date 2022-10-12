@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import detailstyle from "../assets/detailrecipe.module.css";
 import Footers from "../Component/footer";
 import axios from "axios";
@@ -9,25 +9,19 @@ const DetailRecipe = () => {
   const [recipe, setRecipe] = useState([]);
   const [loading, setLoading] = useState(true);
   const [iserror, setIserror] = useState(false);
+  const [queryParam] = useSearchParams();
+
+  const titleSearch = queryParam.get("title");
+  const [title, setTitle] = useState("");
+  const [ingredient, setIngredient] = useState("");
 
   useEffect(() => {
-    // const token = localStorage.getItem("token");
-    // const user = localStorage.getItem("user");
-    // if(!token || !user) {
-    //   return navigate("/login");
-    // }
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/recipe/list`, {
-        // headers: {
-        //   token: token,
-        // }
-      })
+      .get(`${process.env.REACT_APP_BACKEND_URL}/recipe/list/${titleSearch}`)
       .then((res) => {
-        setTimeout(() => {
-          setRecipe(res.data);
-          setLoading(false);
-        }, 100);
-        console.log(res);
+        console.log(res.data[0]);
+        setTitle(res.data[0].title);
+        setIngredient(res.data[0].ingredient.split(","));      
       })
       .catch((err) => {
         console.log(err);
@@ -82,126 +76,9 @@ const DetailRecipe = () => {
         </nav>
       </header>
       <main>
-        {loading ? (
-          <p>Loading...</p>
-        ) : iserror ? (
-          <p>failed to get</p>
-        ) : (
-          recipe.map((data, i) => {
-            // {
-            //     "id_recipe": 14,
-            //     "title": "Nikmat",
-            //     "image": "1663827497930.jpg",
-            //     "ingredient": "masukkan bumbu, siapkan air panas , dan masak",
-            //     "videostep": "dsdsdsd",
-            //     "createdat": "2022-09-08T17:00:00.000Z"
-            // },
-            return (
-              <>
-                <div class={detailstyle.customDetail}>
-                  <h1 class={`${detailstyle.h1} mb-4`}>Chicken Sandwich</h1>
-                  <div class="position-relative">
-                    <img
-                      src={require("../assets/image/makanan1.png")}
-                      alt="chicken"
-                      class={`img-fluid ${detailstyle.customImageFood}`}
-                    />
-                    <button type="button" class={`btn ${detailstyle.btnSave}`}>
-                      <img
-                        src={require("../assets/image/Group 73.png")}
-                        alt=""
-                      />
-                    </button>
-                    <button type="button" class={`btn ${detailstyle.btnLike}`}>
-                      <img
-                        src={require("../assets/image/Vector (1).png")}
-                        alt=""
-                      />
-                    </button>
-                  </div>
-                </div>
-                <div class={`${detailstyle.customIngredient} my-5`}>
-                  <h2>Ingredients</h2>
-                  <ul>
-                    <li>2 eggs</li>
-                    <li>2 tbsp mayonnaise</li>
-                    <li>3 slices bread</li>
-                    <li>a little butter</li>
-                    <li>⅓ carton of cress</li>
-                    <li>
-                      2-3 slices of tomato or a lettuce leaf and a slice of ham
-                      or cheese
-                    </li>
-                    <li>crisps , to serve</li>
-                  </ul>
-
-                  <h2 class="mt-5">Video Step</h2>
-                  <div class="d-grid gap-2">
-                    <div class={detailstyle.btnStyle}>
-                      <button
-                        type="submit"
-                        class={`btn ${detailstyle.btnCustom}`}
-                      >
-                        <Link to="/video">
-                          <img
-                            src={require("../assets/image/Vector (2).png")}
-                            alt=""
-                            style={{ width: "20px" }}
-                          />
-                        </Link>
-                      </button>
-                    </div>
-                    <div class={detailstyle.btnStyle}>
-                      <button
-                        type="submit"
-                        class={`btn ${detailstyle.btnCustom}`}
-                      >
-                        <Link to="/video">
-                          <img
-                            src={require("../assets/image/Vector (2).png")}
-                            alt=""
-                            style={{ width: "20px" }}
-                          />
-                        </Link>
-                      </button>
-                    </div>
-                    <div class={detailstyle.btnStyle}>
-                      <button
-                        type="submit"
-                        class={`btn ${detailstyle.btnCustom}`}
-                      >
-                        <Link to="/video">
-                          <img
-                            src={require("../assets/image/Vector (2).png")}
-                            alt=""
-                            style={{ width: "20px" }}
-                          />
-                        </Link>
-                      </button>
-                    </div>
-                    <div class={detailstyle.btnStyle}>
-                      <button
-                        type="submit"
-                        class={`btn ${detailstyle.btnCustom}`}
-                      >
-                        <Link to="/video">
-                          <img
-                            src={require("../assets/image/Vector (2).png")}
-                            alt=""
-                            style={{ width: "20px" }}
-                          />
-                        </Link>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </>
-            );
-          })
-        )}
         <section class="container mt-5">
-          {/* <div class={detailstyle.customDetail}>
-            <h1 class={`${detailstyle.h1} mb-4`}>Chicken Sandwich</h1>
+          <div class={detailstyle.customDetail}>
+            <h1 class={`${detailstyle.h1} mb-4`}>{title}</h1>
             <div class="position-relative">
               <img
                 src={require("../assets/image/makanan1.png")}
@@ -219,16 +96,9 @@ const DetailRecipe = () => {
           <div class={`${detailstyle.customIngredient} my-5`}>
             <h2>Ingredients</h2>
             <ul>
-              <li>2 eggs</li>
-              <li>2 tbsp mayonnaise</li>
-              <li>3 slices bread</li>
-              <li>a little butter</li>
-              <li>⅓ carton of cress</li>
-              <li>
-                2-3 slices of tomato or a lettuce leaf and a slice of ham or
-                cheese
-              </li>
-              <li>crisps , to serve</li>
+              <li>{ingredient.map((item, index) => {
+                return <li key={index}>{item}</li>;
+              })}</li>
             </ul>
 
             <h2 class="mt-5">Video Step</h2>
@@ -278,7 +148,7 @@ const DetailRecipe = () => {
                 </button>
               </div>
             </div>
-          </div> */}
+          </div>
         </section>
         <section>
           <div class={`container-fluid mb-3 ${detailstyle.customTextarea}`}>
