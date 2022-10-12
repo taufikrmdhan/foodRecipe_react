@@ -214,6 +214,15 @@ const Profile = () => {
                                 </Link>
                               </button>
                             </div>
+                            <div>
+                            <button
+                                
+                                type="button"
+                                className="btn btn-success my-1"
+                              >
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </button>
+                            </div>
                           </div>
                         </>
                       );

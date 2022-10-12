@@ -13,27 +13,21 @@ const LandingPage = () => {
   const [iserror, setIserror] = useState(false);
 
   const onSubmitHandler = (e) => {
-    
     e.preventDefault();
     console.log(title);
-    if(title != ""){
-      axios 
-      .get(`${process.env.REACT_APP_BACKEND_URL}/recipe/list/${title}`)
-      .then((res) => {
-        // setTimeout(() => {
-        //   setRecipe(res.data);
-        //   setLoading(false);
-        // }, 100);
-        console.log(res.data);
-        if(res.data.data = ""){
-          alert("Recipe not found");
-        } else{
-          navigate(`/detail/?title=${title}`);
-        }
-      })
+    if (title != "") {
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/recipe/list/${title}`)
+        .then((res) => {
+          console.log(res.data);
+          if(res.data.length > 0){
+            navigate(`/detail?title=${title}`);
+          } else {
+            alert("Recipe not found");
+          }
+        });
     }
-    
-  }
+  };
 
   useEffect(() => {
     // const token = localStorage.getItem("token");
@@ -58,7 +52,7 @@ const LandingPage = () => {
   const logout = () => {
     localStorage.clear();
     return navigate("/login");
-  }
+  };
 
   return (
     <div className={landing.body}>
@@ -118,27 +112,27 @@ const LandingPage = () => {
               <div className="col-md-6 d-flex align-items-start d-flex flex-column justify-content-center">
                 <h1 className={landing.h1}>Discover Recipe & Delicious Food</h1>
                 <form action="" onSubmit={(e) => onSubmitHandler(e)}>
-                <div
-                  className={`position-relative w-100 ${landing.customButtonHeader}`}
-                >
-                  <div className={landing.customIconSearch}>
-                    <i
-                      className={`fa fa-search ${landing.searchCustom}`}
-                      aria-hidden="true"
-                    ></i>
-                    {/* <img
+                  <div
+                    className={`position-relative w-100 ${landing.customButtonHeader}`}
+                  >
+                    <div className={landing.customIconSearch}>
+                      <i
+                        className={`fa fa-search ${landing.searchCustom}`}
+                        aria-hidden="true"
+                      ></i>
+                      {/* <img
                       src={require("../assets/image/search.svg")}
                       className=
                       alt="icon search"
                     /> */}
+                    </div>
+                    <input
+                      type="search"
+                      placeholder="Search restaurant,food"
+                      className={landing.inputSearchCustom}
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
                   </div>
-                  <input
-                    type="search"
-                    placeholder="Search restaurant,food"
-                    className={landing.inputSearchCustom}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </div>
                 </form>
               </div>
               <div className={`col-md-6 ${landing.imgWrapper}`}>

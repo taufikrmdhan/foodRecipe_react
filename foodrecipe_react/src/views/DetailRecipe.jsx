@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import detailstyle from "../assets/detailrecipe.module.css";
 import Footers from "../Component/footer";
@@ -14,6 +14,7 @@ const DetailRecipe = () => {
   const titleSearch = queryParam.get("title");
   const [title, setTitle] = useState("");
   const [ingredient, setIngredient] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     axios
@@ -21,7 +22,8 @@ const DetailRecipe = () => {
       .then((res) => {
         console.log(res.data[0]);
         setTitle(res.data[0].title);
-        setIngredient(res.data[0].ingredient.split(","));      
+        setIngredient(res.data[0].ingredient.split(","));
+        setImage(`${process.env.REACT_APP_BACKEND_URL}/${res.data[0].image}`);
       })
       .catch((err) => {
         console.log(err);
@@ -81,24 +83,28 @@ const DetailRecipe = () => {
             <h1 class={`${detailstyle.h1} mb-4`}>{title}</h1>
             <div class="position-relative">
               <img
-                src={require("../assets/image/makanan1.png")}
-                alt="chicken"
+                src={image}
+                alt={title}
                 class={`img-fluid ${detailstyle.customImageFood}`}
               />
               <button type="button" class={`btn ${detailstyle.btnSave}`}>
                 <img src={require("../assets/image/Group 73.png")} alt="" />
               </button>
               <button type="button" class={`btn ${detailstyle.btnLike}`}>
-                <img src={require("../assets/image/Vector (1).png")}  alt="" />
+                <img src={require("../assets/image/Vector (1).png")} alt="" />
               </button>
             </div>
           </div>
           <div class={`${detailstyle.customIngredient} my-5`}>
             <h2>Ingredients</h2>
             <ul>
-              <li>{ingredient.map((item, index) => {
-                return <li key={index}>{item}</li>;
-              })}</li>
+              {/* <li>{ingredient.map((item, i) => {
+                return `<li key={i}>{item}</li>`;
+              })}</li> */}
+              <li>{ingredient[0]}</li>
+              <li>{ingredient[1]}</li>
+              <li>{ingredient[2]}</li>
+              <li>{ingredient[3]}</li>
             </ul>
 
             <h2 class="mt-5">Video Step</h2>
