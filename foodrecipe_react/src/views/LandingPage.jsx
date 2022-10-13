@@ -30,11 +30,11 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
-    // const token = localStorage.getItem("token");
-    // const user = localStorage.getItem("user");
-    // if(!token || !user) {
-    //   return navigate("/login");
-    // }
+    const token = localStorage.getItem("token");
+    const data = localStorage.getItem("data");
+    if(!token || !data) {
+      return navigate("/login");
+    }
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/recipe/list`)
       .then((res) => {
@@ -100,8 +100,9 @@ const LandingPage = () => {
               </ul>
             </div>
             <div>
-              <button type="button" className="btn">
-                <User onClick={logout} />
+              <button type="button" className="btn d-flex flex-row" onClick={logout}>
+                <img src={require("../assets/image/iconUser.jpeg")} className="rounded-circle" alt="" />
+                <p className="text-white mt-3">logout</p>
               </button>
             </div>
           </div>
