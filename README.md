@@ -20,7 +20,6 @@ Food Recipe adalah sebuah aplikasi recipe makanan yang dikembangkan menggunakan 
    |── src             # Project source code
        |── Assets      # Image that store use multer
        |── Components  # Layouts
-       |── Redux       # Management State
        |── Router      # Endpoint
        |── views       # pages
    |── .env            # Setting env backend to connecting   
